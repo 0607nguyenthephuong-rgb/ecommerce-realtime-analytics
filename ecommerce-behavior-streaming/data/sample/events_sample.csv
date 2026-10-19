@@ -1,0 +1,10 @@
+event_time,event_type,product_id,category_id,category_code,brand,price,user_id,user_session
+2019-10-01 10:00:00 UTC,view,101,210000000000000001,cosmetics.skincare,demo_brand,12.50,1001,synthetic-session-01
+2019-10-01 10:00:05 UTC,cart,101,210000000000000001,cosmetics.skincare,demo_brand,12.50,1001,synthetic-session-01
+2019-10-01 10:00:10 UTC,remove_from_cart,101,210000000000000001,cosmetics.skincare,demo_brand,12.50,1001,synthetic-session-01
+2019-10-01 10:00:15 UTC,cart,101,210000000000000001,cosmetics.skincare,demo_brand,12.50,1001,synthetic-session-01
+2019-10-01 10:00:20 UTC,purchase,101,210000000000000001,cosmetics.skincare,demo_brand,12.50,1001,synthetic-session-01
+2019-10-01 10:01:00 UTC,view,102,210000000000000002,,,0.00,1002,synthetic-session-02
+2019-10-01 10:01:05 UTC,cart,102,210000000000000002,,,0.00,1002,synthetic-session-02
+2019-10-01 10:01:10 UTC,view,103,,,demo_brand,7.25,1003,
+

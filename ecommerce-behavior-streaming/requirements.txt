@@ -1,0 +1,4 @@
+# Optional: required only for publishing to a running Kafka broker.
+# Dry-run replay and the local tests use the Python standard library.
+kafka-python==3.0.11
+

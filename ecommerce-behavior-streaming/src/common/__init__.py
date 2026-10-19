@@ -1,0 +1,2 @@
+"""Shared source-event contracts."""
+

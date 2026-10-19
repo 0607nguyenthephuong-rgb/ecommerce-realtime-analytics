@@ -1,0 +1,46 @@
+# Python and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+config/project.local.json
+kaggle.json
+*credentials*.json
+*.pem
+*.key
+
+# Real data and generated files
+data/raw/
+data/processed/
+data/downloads/
+artifacts/
+checkpoints/
+spark-warehouse/
+metastore_db/
+derby.log
+logs/
+*.log
+*.parquet
+*.avro
+*.zip
+*.tar
+*.gz
+*.7z
+infra/volumes/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
