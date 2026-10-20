@@ -1,9 +1,0 @@
-{
-  "csv_path": "data/sample/events_sample.csv",
-  "dataset_version": "synthetic-fixture-v1",
-  "bootstrap_servers": "localhost:9092",
-  "topic": "ecommerce.events.raw",
-  "events_per_second": 100,
-  "max_events": 1000
-}
-
