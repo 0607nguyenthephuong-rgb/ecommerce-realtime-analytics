@@ -63,3 +63,30 @@ ECOMMERCE_DATA_DIR=examples bash scripts/run_producer.sh --max-events 3 --speed 
 ```
 
 By default, the producer reads CSV files from `data/`. Set `ECOMMERCE_DATA_DIR` to another directory to change the source. Pipeline logs appear in `logs/`; Bronze, Silver, Gold, and quarantine tables appear under `lakehouse/`.
+
+## Script guide
+
+Run these commands from the project root, after activating the conda environment:
+
+| Script | When to run it |
+| --- | --- |
+| `scripts/run_pipeline.sh` | Start the local services, initialize Oracle, and run the outbox relay plus all three Spark jobs. Keep this terminal open; press Ctrl+C to stop the jobs. |
+| `scripts/run_producer.sh` | Replay CSV rows into Oracle while the pipeline is running. It reads `data/*.csv` by default. |
+| `scripts/init_oracle_payments.sh` | Initialize the Oracle payment schema separately if needed. `run_pipeline.sh` already calls it. |
+| `scripts/reset_kafka.sh` | Recreate the two Kafka topics if a reset is needed. Stop the pipeline and archive the entire `lakehouse/` directory first. |
+
+For your own CSV files, place them in `data/` and run:
+
+```bash
+bash scripts/run_producer.sh --max-events 1000
+```
+
+Remove `--max-events` to replay all rows. Use `--speed 60` to replay at 60 times the event-time rate; the default is 600. Replaying the same CSV rows keeps their Oracle event IDs, so it does not create new orders.
+
+To reset Kafka after archiving the lakehouse, keep Kafka running and execute:
+
+```bash
+bash scripts/reset_kafka.sh
+```
+
+This resets Kafka topics only. Oracle retains its orders and processed-event history, so previously ingested CSV rows remain deduplicated.
