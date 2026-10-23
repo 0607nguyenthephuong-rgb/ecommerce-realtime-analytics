@@ -19,6 +19,8 @@ BOOTSTRAP="${ECOMMERCE_BOOTSTRAP_SERVERS:-localhost:9092}"
 BRONZE_TRIGGER_SECONDS="${ECOMMERCE_BRONZE_TRIGGER_SECONDS:-10}"
 SILVER_TRIGGER_SECONDS="${ECOMMERCE_SILVER_TRIGGER_SECONDS:-20}"
 GOLD_TRIGGER_SECONDS="${ECOMMERCE_GOLD_TRIGGER_SECONDS:-30}"
+SPARK_MASTER="${ECOMMERCE_SPARK_MASTER:-local[1]}"
+SPARK_DRIVER_MEMORY="${ECOMMERCE_SPARK_DRIVER_MEMORY:-1g}"
 
 # =====================================================
 # Validate environment
@@ -93,8 +95,8 @@ trap 'exit 143' TERM
 echo "Starting Bronze Streaming..."
 
 spark-submit \
-    --master 'local[2]' \
-    --driver-memory 2g \
+    --master "$SPARK_MASTER" \
+    --driver-memory "$SPARK_DRIVER_MEMORY" \
     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.8 \
     "$BRONZE_SCRIPT" \
     --bootstrap-servers "$BOOTSTRAP" \
@@ -112,8 +114,8 @@ BRONZE_PID=$!
 echo "Starting Silver Streaming..."
 
 spark-submit \
-    --master 'local[2]' \
-    --driver-memory 2g \
+    --master "$SPARK_MASTER" \
+    --driver-memory "$SPARK_DRIVER_MEMORY" \
     --packages io.delta:delta-spark_2.12:3.3.2 \
     "$SILVER_SCRIPT" \
     --trigger-seconds "$SILVER_TRIGGER_SECONDS" \
@@ -129,8 +131,8 @@ SILVER_PID=$!
 echo "Starting Gold Streaming..."
 
 spark-submit \
-    --master 'local[2]' \
-    --driver-memory 2g \
+    --master "$SPARK_MASTER" \
+    --driver-memory "$SPARK_DRIVER_MEMORY" \
     --packages io.delta:delta-spark_2.12:3.3.2 \
     "$GOLD_SCRIPT" \
     --trigger-seconds "$GOLD_TRIGGER_SECONDS" \
