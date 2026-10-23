@@ -1,0 +1,4 @@
+event_time,event_type,product_id,category_id,category_code,brand,price,user_id,user_session,quantity,payment_outcome
+2020-04-01 00:00:00 UTC,view,99112345,10,demo.checkout,Demo,19.90,4245,session-example,,
+2020-04-01 00:00:01 UTC,purchase,99112345,10,demo.checkout,Demo,0.01,4245,session-example,2,succeeded
+2020-04-01 00:00:02 UTC,purchase,99112345,10,demo.checkout,Demo,0.01,4245,session-example,1,declined
