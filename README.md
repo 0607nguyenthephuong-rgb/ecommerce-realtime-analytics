@@ -74,6 +74,7 @@ Run these commands from the project root, after activating the conda environment
 | `scripts/run_producer.sh` | Replay CSV rows into Oracle while the pipeline is running. It reads `data/*.csv` by default. |
 | `scripts/init_oracle_payments.sh` | Initialize the Oracle payment schema separately if needed. `run_pipeline.sh` already calls it. |
 | `scripts/reset_kafka.sh` | Recreate the two Kafka topics if a reset is needed. Stop the pipeline and archive the entire `lakehouse/` directory first. |
+| `scripts/reset_oracle.sh` | Delete this project's Oracle catalog, orders, payments, processed-event history, and outbox rows. Stop the producer and pipeline first. The Oracle schema remains in place. |
 
 For your own CSV files, place them in `data/` and run:
 
@@ -90,3 +91,11 @@ bash scripts/reset_kafka.sh
 ```
 
 This resets Kafka topics only. Oracle retains its orders and processed-event history, so previously ingested CSV rows remain deduplicated.
+
+For a clean replay of the same CSV, stop the pipeline and producer, archive the entire `lakehouse/` directory, then reset both Kafka and Oracle before starting the pipeline again:
+
+```bash
+bash scripts/reset_kafka.sh
+bash scripts/reset_oracle.sh
+bash scripts/run_pipeline.sh
+```
